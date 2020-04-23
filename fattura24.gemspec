@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['stefano.nada@gmail.com']
 
   spec.summary       = 'Ruby wrapper for fattura24 apis'
-  spec.description   = 'Ruby wrapper for fattura24 apis'
+  spec.description   = 'Minimal Ruby 2 wrapper for fattura24 apis.'
   spec.homepage      = 'https://github.com/snada/fattura24'
   spec.license       = 'MIT'
 
