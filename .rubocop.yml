@@ -14,3 +14,11 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+Layout/LineLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*

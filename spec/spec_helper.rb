@@ -4,6 +4,8 @@ require 'simplecov'
 SimpleCov.start
 
 require 'bundler/setup'
+require 'webmock/rspec'
+require 'pry'
 require 'fattura24'
 
 RSpec.configure do |config|
@@ -17,5 +19,11 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.after(:example) do
+    Fattura24.configure do |c|
+      c.api_key = nil
+    end
   end
 end

@@ -1,6 +1,6 @@
 # Fattura24
 
-Simple no-dependencies ruby 2 wrapper for the [Fattura24](https://www.fattura24.com/) apis.
+Simple, lightweight and with minimal dependencies ruby 2 wrapper for the [Fattura24](https://www.fattura24.com/) apis.
 
 Tested and developed on rubies 2.4+, should be simple enough to work on older versions.
 
@@ -30,6 +30,21 @@ Fattura24.configure do |configuration|
 end
 ```
 
+Once set, you can call the api methods to get the responses you need.
+
+```ruby
+response = Fattura24::Api.test_key
+
+# Check for possible network errors, returns true on ok (200) responses
+puts response.success?
+
+# Call .to_h to get a hash version of the xml response
+puts response.to_h[:returnCode]
+
+# If you need more info, check the raw Net::HTTP response object
+raw_response = response.http_response
+```
+
 Beware, this will not validate your api key by triggering the appropriate api endpoint. You are required to explicitly call the appropriate method if you want to check the status of your token.
 
 ## Development
@@ -46,6 +61,8 @@ Then run `bundle exec rake release`, which will create a git tag for the version
 ## Contributing
 
 Everyone is welcome to contribute.
+This project tries to follow the git-flow branching model. Open a branch named `feature/<name>` and make a PR against `develop`.
+
 Please, make sure you include appropriate unit tests to the codebase (also check coverage) and that your code satisfies rubocop checks.
 
 ## License

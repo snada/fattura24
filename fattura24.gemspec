@@ -4,6 +4,21 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fattura24/version'
 
+file_regex = /^(
+  \.env.example|
+  \.dockerignore|
+  \.gitignore|
+  \.rspec|
+  \.rubocop.yml|
+  \.ruby-version|
+  \.travis.yml|
+  Makefile|
+  Dockerfile\.|
+  test|
+  spec|
+  bin
+)/x
+
 Gem::Specification.new do |spec|
   spec.name          = 'fattura24'
   spec.version       = Fattura24::VERSION
@@ -20,7 +35,7 @@ Gem::Specification.new do |spec|
   # been added into git.
   spec.files         = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject do |f|
-      f.match(%r{^(test|spec|features)/})
+      f.match(file_regex)
     end
   end
   spec.bindir        = 'exe'
@@ -28,8 +43,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 2.1'
+  spec.add_development_dependency 'dotenv', '~> 2.7'
+  spec.add_development_dependency 'pry', '~> 0.13'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'rubocop', '~> 0.8'
   spec.add_development_dependency 'simplecov', '~> 0.18'
+  spec.add_development_dependency 'webmock', '~> 3.8'
+  spec.add_development_dependency 'xmlhasher', '~> 1.0'
 end
