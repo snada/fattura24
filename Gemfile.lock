@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     fattura24 (0.0.0)
+      nokogiri (~> 1.10)
+      xmlhasher (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -19,6 +21,9 @@ GEM
     hashdiff (1.0.1)
     jaro_winkler (1.5.4)
     method_source (1.0.0)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.9)
+      mini_portile2 (~> 2.4.0)
     ox (2.11.0)
     parallel (1.19.1)
     parser (2.7.1.1)
@@ -79,7 +84,6 @@ DEPENDENCIES
   rubocop (~> 0.8)
   simplecov (~> 0.18)
   webmock (~> 3.8)
-  xmlhasher (~> 1.0)
 
 BUNDLED WITH
    2.1.4

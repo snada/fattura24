@@ -14,6 +14,8 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
+Layout/FirstHashElementIndentation:
+  Enabled: false
 Metrics/BlockLength:
   Enabled: true
   Exclude:
