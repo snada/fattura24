@@ -17,6 +17,7 @@ RSpec.describe Fattura24::Api do
         end
 
         stub_request(:post, url)
+          .with(body: { apiKey: 'invalid', xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Fattura24>\n  <Document/>\n</Fattura24>\n" })
           .to_return(status: 200, body: xml, headers: {})
       end
 
@@ -43,6 +44,10 @@ RSpec.describe Fattura24::Api do
         end
 
         stub_request(:post, url)
+          .with(body: {
+            apiKey: 'valid',
+            xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Fattura24>\n  <Document>\n    <CustomerName>John Doe</CustomerName>\n    <CustomerAddress>Via Po 1</CustomerAddress>\n    <CustomerPostcode>10100</CustomerPostcode>\n    <CustomerCity>Torino</CustomerCity>\n    <Customerprovince>TO</Customerprovince>\n    <CustomerCountry/>\n    <CustomerFiscalCode>MARROS66C44G217W</CustomerFiscalCode>\n    <CustomerVatCode>03912377542</CustomerVatCode>\n    <CustomerCellPhone>335123456789</CustomerCellPhone>\n    <CustomerEmail>email@fake.com</CustomerEmail>\n    <FeCustomerPec>pec@fake.com</FeCustomerPec>\n    <FeDestinationCode>0000000</FeDestinationCode>\n  </Document>\n</Fattura24>\n"
+          })
           .to_return(status: 200, body: xml, headers: {})
       end
 
