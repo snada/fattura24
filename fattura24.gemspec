@@ -38,8 +38,8 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'nokogiri', '~> 1.10'
-  spec.add_runtime_dependency 'xmlhasher', '~> 1.0'
+  spec.add_runtime_dependency 'activesupport', '>= 5.0.0'
+  spec.add_runtime_dependency 'builder'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'dotenv', '~> 2.7'

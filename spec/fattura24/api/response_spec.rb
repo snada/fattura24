@@ -68,14 +68,14 @@ RSpec.describe Fattura24::Api::Response do
     it 'returns an hash from the xml body' do
       expect(valid_response.to_h).to eq(
         root: {
-          returnCode: '1',
+          return_code: '1',
           description: 'A description'
         }
       )
     end
 
-    it 'returns an empty hash on a nil response' do
-      expect(nil_response.to_h).to eq({})
+    it 'returns nil on a nil response' do
+      expect(nil_response.to_h).to eq(nil)
     end
   end
 

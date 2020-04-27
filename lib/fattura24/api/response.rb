@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'xmlhasher'
-
 module Fattura24
   module Api
     class Response
@@ -20,7 +18,10 @@ module Fattura24
       end
 
       def to_h
-        XmlHasher.parse(http_response&.body || '')
+        Hash.from_xml(http_response&.body)
+          &.deep_transform_keys do |key|
+            key.to_s.underscore.to_sym
+          end
       end
 
       def to_s
