@@ -24,7 +24,7 @@ RSpec.describe Fattura24::Api do
       it 'returns error' do
         expect(Fattura24::Api.test_key.to_h).to eq(
           root: {
-            returnCode: '-1',
+            return_code: '-1',
             description: 'You are not authorized to use this service. For more details write to assistenza@fattura24.com'
           }
         )
@@ -51,8 +51,8 @@ RSpec.describe Fattura24::Api do
       it 'returns a valid response' do
         expect(Fattura24::Api.test_key.to_h).to eq(
           root: {
-            description: 'Complimenti, la tua API KEY è corretta.',
-            returnCode: '1',
+            description: 'Complimenti, la tua API KEY &egrave; corretta.',
+            return_code: '1',
             subscription: {
               expire: '21/04/2021',
               type: '5'

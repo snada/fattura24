@@ -17,14 +17,14 @@ RSpec.describe Fattura24::Api do
         end
 
         stub_request(:post, url)
-          .with(body: { apiKey: 'invalid', xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Fattura24>\n  <Document/>\n</Fattura24>\n" })
+          .with(body: { apiKey: 'invalid', xml: '<?xml version="1.0" encoding="UTF-8"?><Fattura24><Document><CustomerName>whatever</CustomerName></Document></Fattura24>' })
           .to_return(status: 200, body: xml, headers: {})
       end
 
       it 'returns error' do
-        expect(Fattura24::Api.save_customer({}).to_h).to eq(
+        expect(Fattura24::Api.save_customer({ customer_name: 'whatever' }).to_h).to eq(
           root: {
-            returnCode: '-1',
+            return_code: '-1',
             description: 'You are not authorized to use this service. For more details write to assistenza@fattura24.com'
           }
         )
@@ -46,7 +46,7 @@ RSpec.describe Fattura24::Api do
         stub_request(:post, url)
           .with(body: {
             apiKey: 'valid',
-            xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Fattura24>\n  <Document>\n    <CustomerName>John Doe</CustomerName>\n    <CustomerAddress>Via Po 1</CustomerAddress>\n    <CustomerPostcode>10100</CustomerPostcode>\n    <CustomerCity>Torino</CustomerCity>\n    <Customerprovince>TO</Customerprovince>\n    <CustomerCountry/>\n    <CustomerFiscalCode>MARROS66C44G217W</CustomerFiscalCode>\n    <CustomerVatCode>03912377542</CustomerVatCode>\n    <CustomerCellPhone>335123456789</CustomerCellPhone>\n    <CustomerEmail>email@fake.com</CustomerEmail>\n    <FeCustomerPec>pec@fake.com</FeCustomerPec>\n    <FeDestinationCode>0000000</FeDestinationCode>\n  </Document>\n</Fattura24>\n"
+            xml: '<?xml version="1.0" encoding="UTF-8"?><Fattura24><Document><CustomerName>John Doe</CustomerName><CustomerAddress>Via Po 1</CustomerAddress><CustomerPostcode>10100</CustomerPostcode><CustomerCity>Torino</CustomerCity><CustomerProvince>TO</CustomerProvince><CustomerFiscalCode>MARROS66C44G217W</CustomerFiscalCode><CustomerVatCode>03912377542</CustomerVatCode><CustomerCellPhone>335123456789</CustomerCellPhone><CustomerEmail>email@fake.com</CustomerEmail><FeCustomerPec>pec@fake.com</FeCustomerPec><FeDestinationCode>0000000</FeDestinationCode></Document></Fattura24>'
           })
           .to_return(status: 200, body: xml, headers: {})
       end
@@ -57,7 +57,7 @@ RSpec.describe Fattura24::Api do
           customer_address: 'Via Po 1',
           customer_postcode: '10100',
           customer_city: 'Torino',
-          CustomerProvince: 'TO',
+          customer_province: 'TO',
           customer_country: nil,
           customer_fiscal_code: 'MARROS66C44G217W',
           customer_vat_code: '03912377542',
@@ -67,21 +67,65 @@ RSpec.describe Fattura24::Api do
           fe_destination_code: '0000000'
         ).to_h).to eq(
           root: {
-            returnCode: '0',
+            return_code: '0',
             description: 'Operazione completata con successo',
             id: '0000000',
-            CustomerName: 'John Doe',
-            CustomerCity: 'Torino',
-            CustomerAddress: 'Via Po 1',
-            CustomerPostcode: '10100',
-            CustomerVatCode: '03912377542',
-            CustomerFiscalCode: 'MARROS66C44G217W',
-            CustomerEmail: 'email@fake.com',
-            CustomerCellPhone: '335123456789',
-            FeCustomerPec: 'pec@fake.com',
-            FeDestinationCode: '0000000'
+            customer_name: 'John Doe',
+            customer_address: 'Via Po 1',
+            customer_postcode: '10100',
+            customer_city: 'Torino',
+            customer_fiscal_code: 'MARROS66C44G217W',
+            customer_vat_code: '03912377542',
+            customer_cell_phone: '335123456789',
+            customer_email: 'email@fake.com',
+            fe_customer_pec: 'pec@fake.com',
+            fe_destination_code: '0000000'
           }
         )
+      end
+
+      context 'when passing an empty body' do
+        let(:xml) do
+          <<~XML
+            <root><returnCode>-2</returnCode><description>Your XML is wrong. If you want write to technical support: assistenza@fattura24.com</description></root>
+          XML
+        end
+
+        before(:each) do
+          stub_request(:post, url)
+            .with(body: {
+              apiKey: 'valid',
+              xml: '<?xml version="1.0" encoding="UTF-8"?><Fattura24><Document></Document></Fattura24>'
+            })
+            .to_return(status: 200, body: xml, headers: {})
+        end
+
+        it 'fails on empty data' do
+          expect(Fattura24::Api.save_customer.to_h).to eq(
+            root: {
+              return_code: '-2',
+              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
+            }
+          )
+        end
+
+        it 'fails on empty data' do
+          expect(Fattura24::Api.save_customer({}).to_h).to eq(
+            root: {
+              return_code: '-2',
+              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
+            }
+          )
+        end
+
+        it 'fails on empty data' do
+          expect(Fattura24::Api.save_customer([nil]).to_h).to eq(
+            root: {
+              return_code: '-2',
+              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
+            }
+          )
+        end
       end
     end
   end
