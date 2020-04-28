@@ -31,6 +31,12 @@ module Fattura24
     end
     # rubocop:enable Naming/AccessorMethodName
 
+    # rubocop:disable Naming/AccessorMethodName
+    def self.get_pdc
+      request('/GetPdc', { apiKey: Fattura24.configuration.api_key })
+    end
+    # rubocop:enable Naming/AccessorMethodName
+
     def self.save_customer(data = {})
       params = hash_to_xml(data)
 
