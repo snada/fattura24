@@ -11,7 +11,7 @@ module Fattura24
 
       uri = URI.parse("#{API_HOST}#{path}")
       request = Net::HTTP::Post.new(uri)
-      request.set_form_data(body)
+      request.set_form_data(inject_api_key(body))
 
       req_options = { use_ssl: uri.scheme == 'https' }
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -22,29 +22,33 @@ module Fattura24
     end
 
     def self.test_key
-      request('/TestKey', { apiKey: Fattura24.configuration.api_key })
+      request('/TestKey')
     end
 
     # rubocop:disable Naming/AccessorMethodName
     def self.get_template
-      request('/GetTemplate', { apiKey: Fattura24.configuration.api_key })
+      request('/GetTemplate')
     end
 
     def self.get_pdc
-      request('/GetPdc', { apiKey: Fattura24.configuration.api_key })
+      request('/GetPdc')
     end
 
     def self.get_numerator
-      request('/GetNumerator', { apiKey: Fattura24.configuration.api_key })
+      request('/GetNumerator')
     end
+
     # rubocop:enable Naming/AccessorMethodName
 
     def self.save_customer(data = {})
-      params = hash_to_xml(data)
-
       request('/SaveCustomer', {
-        apiKey: Fattura24.configuration.api_key,
-        xml: params
+        xml: hash_to_xml(data)
+      })
+    end
+
+    def self.save_document(data = {})
+      request('/SaveDocument', {
+        xml: hash_to_xml(data)
       })
     end
 
@@ -57,5 +61,11 @@ module Fattura24
           camelize: true
         )
     end
+
+    def self.inject_api_key(hash)
+      hash.merge(apiKey: Fattura24.configuration.api_key)
+    end
+
+    private_class_method :hash_to_xml, :inject_api_key
   end
 end
