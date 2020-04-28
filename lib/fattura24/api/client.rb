@@ -29,11 +29,13 @@ module Fattura24
     def self.get_template
       request('/GetTemplate', { apiKey: Fattura24.configuration.api_key })
     end
-    # rubocop:enable Naming/AccessorMethodName
 
-    # rubocop:disable Naming/AccessorMethodName
     def self.get_pdc
       request('/GetPdc', { apiKey: Fattura24.configuration.api_key })
+    end
+
+    def self.get_numerator
+      request('/GetNumerator', { apiKey: Fattura24.configuration.api_key })
     end
     # rubocop:enable Naming/AccessorMethodName
 

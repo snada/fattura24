@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <doc>
+    <id>1</id>
+    <des>Fattura</des>
+  </doc>  
+  <sezionale>
+    <id>1</id>
+    <idProfilo>0</idProfilo>
+    <code>-{YYYY}</code>
+    <anteprima><![CDATA[01-2020]]></anteprima>
+    <codExport><![CDATA[]]></codExport>
+    <doc>
+      <id>1</id>
+      <stato>2</stato>
+    </doc>
+    <doc_1>2</doc_1>
+  </sezionale>
+</root>
