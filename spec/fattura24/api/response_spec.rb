@@ -9,10 +9,12 @@ RSpec.describe Fattura24::Api::Response do
 
   let(:valid_url) { 'https://www.app.fattura24.com/api/v0.3/Valid' }
   let(:invalid_url) { 'https://www.app.fattura24.com/api/v0.3/Invalid' }
+  let(:binary_url) { 'https://www.app.fattura24.com/api/v0.3/Binary' }
 
   let(:valid_response) { Fattura24::Api.request('/Valid') }
   let(:invalid_response) { Fattura24::Api.request('/Invalid') }
   let(:nil_response) { Fattura24::Api::Response.new(nil) }
+  let(:binary_response) { Fattura24::Api.request('/Binary') }
 
   before(:each) do
     Fattura24.configure do |c|
@@ -24,6 +26,12 @@ RSpec.describe Fattura24::Api::Response do
 
     stub_request(:post, invalid_url)
       .to_return(status: 400, body: xml, headers: {})
+
+    stub_request(:post, binary_url)
+      .to_return(
+        status: 200,
+        headers: { 'content-type': 'application/pdf' }
+      )
   end
 
   describe '#http_response' do
@@ -76,6 +84,10 @@ RSpec.describe Fattura24::Api::Response do
 
     it 'returns nil on a nil response' do
       expect(nil_response.to_h).to eq(nil)
+    end
+
+    it 'raises an error on a pdf response' do
+      expect { binary_response.to_h }.to raise_error(Fattura24::NotSerializable)
     end
   end
 

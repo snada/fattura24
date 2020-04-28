@@ -38,6 +38,12 @@ module Fattura24
       request('/GetNumerator')
     end
 
+    def self.get_file(id)
+      raise(Fattura24::MissingInput, 'You need to provide an id') unless id
+
+      request('/GetFile', { docId: id })
+    end
+
     # rubocop:enable Naming/AccessorMethodName
 
     def self.save_customer(data = {})

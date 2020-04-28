@@ -10,4 +10,6 @@ module Fattura24
   end
 
   class MissingInput < Error; end
+
+  class NotSerializable < Error; end
 end

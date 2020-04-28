@@ -17,7 +17,18 @@ module Fattura24
         http_response&.code.to_i
       end
 
+      def pdf?
+        http_response&.content_type&.underscore == 'application/pdf'
+      end
+
       def to_h
+        if pdf?
+          raise(
+            Fattura24::NotSerializable,
+            'Cannot create hash from binary file'
+          )
+        end
+
         Hash.from_xml(http_response&.body)
           &.deep_transform_keys do |key|
             key.to_s.underscore.to_sym
