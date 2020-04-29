@@ -63,6 +63,12 @@ module Fattura24
       })
     end
 
+    def self.save_item(data = {})
+      request('/SaveItem', {
+        xml: hash_to_xml(data)
+      })
+    end
+
     def self.hash_to_xml(hash)
       { document: Fattura24::Utils.crush(hash) || '' }
         .to_xml(
