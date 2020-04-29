@@ -44,6 +44,11 @@ module Fattura24
       request('/GetFile', { docId: id })
     end
 
+    def self.get_product(options = {})
+      validate_params(options, %i[code category])
+      request('/GetProduct', options)
+    end
+
     # rubocop:enable Naming/AccessorMethodName
 
     def self.save_customer(data = {})
@@ -72,6 +77,22 @@ module Fattura24
       hash.merge(apiKey: Fattura24.configuration.api_key)
     end
 
-    private_class_method :hash_to_xml, :inject_api_key
+    def self.validate_params(params, permitted_params)
+      invalid_params = params.keys.map(&:to_sym) - permitted_params
+
+      raise_params_error(invalid_params) if invalid_params.any?
+    end
+
+    def self.raise_params_error(invalid_params)
+      msg = "This params are not permitted: #{invalid_params.join(', ')}"
+      raise Fattura24::InvalidParams, msg
+    end
+
+    private_class_method(
+      :hash_to_xml,
+      :inject_api_key,
+      :validate_params,
+      :raise_params_error
+    )
   end
 end
