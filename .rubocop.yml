@@ -22,5 +22,7 @@ Metrics/BlockLength:
     - spec/**/*
 Layout/LineLength:
   Enabled: true
+  IgnoredPatterns:
+    - ^\s*# {
   Exclude:
     - spec/**/*

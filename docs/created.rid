@@ -1,0 +1,10 @@
+Thu, 30 Apr 2020 02:02:43 -0400
+README.md	Fri, 24 Apr 2020 19:34:25 -0400
+lib/fattura24.rb	Wed, 29 Apr 2020 16:08:07 -0400
+lib/fattura24/api/client.rb	Thu, 30 Apr 2020 02:02:29 -0400
+lib/fattura24/api/response.rb	Thu, 30 Apr 2020 01:52:00 -0400
+lib/fattura24/configuration.rb	Wed, 29 Apr 2020 16:04:40 -0400
+lib/fattura24/document_type.rb	Thu, 30 Apr 2020 01:55:39 -0400
+lib/fattura24/errors.rb	Wed, 29 Apr 2020 16:06:16 -0400
+lib/fattura24/utils.rb	Wed, 29 Apr 2020 16:18:35 -0400
+lib/fattura24/version.rb	Fri, 24 Apr 2020 18:06:04 -0400

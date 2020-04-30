@@ -13,10 +13,15 @@ require 'fattura24/utils'
 require 'fattura24/version'
 
 module Fattura24
+  ##
+  # Returns current configuration object
   def self.configuration
     @configuration ||= Configuration.new
   end
 
+  ##
+  # Calling this method will yield to a block
+  # passing the +configuration+ object as parameter.
   def self.configure
     yield configuration
   end

@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Fattura24::DocumentType do
+  context '#ELECTRONIC_INVOICE' do
+    it 'returns the right value' do
+      expect(Fattura24::DocumentType::ELECTRONIC_INVOICE).to eq('FE')
+    end
+  end
+
   context '#INVOICE' do
     it 'returns the right value' do
       expect(Fattura24::DocumentType::INVOICE).to eq('I')

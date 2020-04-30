@@ -33,6 +33,7 @@ end
 Once set, you can call the api methods to get the responses you need.
 
 ```ruby
+# This method checks if your key is valid
 response = Fattura24::Api.test_key
 
 # Check for possible network errors, returns true on ok (200) responses
@@ -45,7 +46,102 @@ puts response.to_h[:returnCode]
 raw_response = response.http_response
 ```
 
-Beware, this will not validate your api key by triggering the appropriate api endpoint. You are required to explicitly call the appropriate method if you want to check the status of your token.
+### Api calls
+
+You can take inspiration on the params to provide to your calls by visiting the [official documentation](https://www.fattura24.com/api-documentazione/).
+Generally speaking, this library will translate the structure of your hash to an equivalent xml document camelizing all of your keys.
+
+#### TestKey, GetTemplate, GetPdc, GetNumerator
+
+All of these calls don't require any argument. Simply call them and inspect their response:
+
+```ruby
+r = Fattura24::Api.test_key
+r = Fattura24::Api.get_template
+r = Fattura24::Api.get_pdc
+r = Fattura24::Api.get_numerator
+
+puts r.to_h
+```
+
+#### SaveCustomer
+
+```ruby
+r = Fattura24::Api.save_customer(
+  customer_name: 'John Doe',
+  customer_address: '100 Yonge Street',
+  customer_city: 'Toronto',
+  customer_country: 'CA',
+  customer_fiscal_code: 'Set this for persons',
+  customer_vat_code: 'vat',
+  customer_email: 'some@email.com',
+  fe_customer_pec: 'a@pec.com'
+)
+```
+
+#### SaveDocument
+
+```ruby
+r = Fattura24::Api.save_document(
+  document_type: Fattura24::DocumentType::ELECTRONIC_INVOICE,
+  customer_name: 'John Doe',
+  customer_fiscal_code: 'NDASFN89A27L219Y',
+  customer_address: '100 Yonge Street',
+  customer_city: 'Toronto',
+  customer_country: 'CA',
+  payments: [
+    {
+      date: '2020-04-27',
+      amount: '100',
+      paid: 'true'
+    }
+  ],
+  rows: [
+    {
+      code: '001',
+      description: 'Element description',
+      qty: '1',
+      price: '100'
+    }
+  ],
+  id_template: '65',
+  send_email: 'true',
+  object: 'test',
+  total: 100,
+  total_without_tax: 100,
+  vat_amount: 0
+)
+```
+
+#### GetFile
+
+```ruby
+r = Fattura24::Api.get_file('1234567')
+
+# true if response content is actually a file
+if r.pdf?
+  File.write('invoice.pdf', r.to_s)
+end
+```
+
+#### GetProduct
+
+```ruby
+# gets all products
+r = Fattura24::Api.get_product
+
+# filters by code
+r = Fattura24::Api.get_product(code: 'some_code')
+
+# filters by category
+r = Fattura24::Api.get_product(category: 'some_category')
+
+# combines both
+r = Fattura24::Api.get_product({
+  code: 'some_code',
+  category: 'some_category'
+})
+```
 
 ## Development
 
@@ -53,9 +149,25 @@ After checking out the repo, run `bundle` to install dependencies. Then, run `bu
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
+To run tests and linting, simply run `bundle exec rake`.
+
+When you edit something, include appropriate docs and rebuild them by running `bundle exec rake rdoc`.
+
+If you have docker installed, you can test against all of the supported ruby versions by running:
+
+```bash
+$ make build
+```
+
+That will build the required docker images, and then you can run tests with:
+
+```bash
+$ make
+```
+
 ### Release of a new version
 
-To release a new version, update the version number in `version.rb`, and `lib/fattura24/version`. Make sure version tests are still satisfied.
+To release a new version, update the version number in `lib/fattura24/version.rb`. Make sure version tests are still satisfied.
 Then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
