@@ -16,9 +16,15 @@ RSpec.shared_context 'invalid api key', shared_context: :metadata do
     }
   end
 
+  let(:body) { { apiKey: 'invalid' } }
+
   before(:each) do
     Fattura24.configure do |c|
       c.api_key = 'invalid'
     end
+
+    stub_request(:post, url)
+      .with(body: body)
+      .to_return(status: 200, body: xml, headers: {})
   end
 end

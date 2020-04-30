@@ -7,10 +7,8 @@ RSpec.describe Fattura24::Api do
     context 'with an invalid api key' do
       include_context 'invalid api key'
 
-      before(:each) do
-        stub_request(:post, url)
-          .with(body: { apiKey: 'invalid', xml: '<?xml version="1.0" encoding="UTF-8"?><Fattura24><Document><CustomerName>whatever</CustomerName></Document></Fattura24>' })
-          .to_return(status: 200, body: xml, headers: {})
+      let(:body) do
+        { apiKey: 'invalid', xml: '<?xml version="1.0" encoding="UTF-8"?><Fattura24><Document><CustomerName>whatever</CustomerName></Document></Fattura24>' }
       end
 
       it 'returns error' do
