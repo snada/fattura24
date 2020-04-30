@@ -62,6 +62,12 @@
     <li><a href="#label-Fattura24">Fattura24</a>
     <li><a href="#label-Installation">Installation</a>
     <li><a href="#label-Usage">Usage</a>
+    <li><a href="#label-Api+calls">Api calls</a>
+    <li><a href="#label-TestKey-2C+GetTemplate-2C+GetPdc-2C+GetNumerator">TestKey, GetTemplate, GetPdc, GetNumerator</a>
+    <li><a href="#label-SaveCustomer">SaveCustomer</a>
+    <li><a href="#label-SaveDocument">SaveDocument</a>
+    <li><a href="#label-GetFile">GetFile</a>
+    <li><a href="#label-GetProduct">GetProduct</a>
     <li><a href="#label-Development">Development</a>
     <li><a href="#label-Release+of+a+new+version">Release of a new version</a>
     <li><a href="#label-Contributing">Contributing</a>
@@ -88,9 +94,11 @@
 
 <h1 id="label-Fattura24"><a href="Fattura24.html"><code>Fattura24</code></a><span><a href="#label-Fattura24">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
+<p><a href="https://travis-ci.org/snada/fattura24"><img src="https://travis-ci.org/snada/fattura24.svg?branch=master"></a> <a href="https://codeclimate.com/github/snada/fattura24/maintainability"><img src="https://api.codeclimate.com/v1/badges/8db0d6f2c8e567f09319/maintainability"></a> <a href="https://codeclimate.com/github/snada/fattura24/test_coverage"><img src="https://api.codeclimate.com/v1/badges/8db0d6f2c8e567f09319/test_coverage"></a></p>
+
 <p>Simple, lightweight and with minimal dependencies ruby 2 wrapper for the <a href="https://www.fattura24.com/">Fattura24</a> apis.</p>
 
-<p>Tested and developed on rubies 2.4+, should be simple enough to work on older versions.</p>
+<p>Tested and developed on rubies 2.4+.</p>
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -118,7 +126,8 @@
 
 <p>Once set, you can call the api methods to get the responses you need.</p>
 
-<pre class="ruby"><span class="ruby-identifier">response</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">test_key</span>
+<pre class="ruby"><span class="ruby-comment"># This method checks if your key is valid</span>
+<span class="ruby-identifier">response</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">test_key</span>
 
 <span class="ruby-comment"># Check for possible network errors, returns true on ok (200) responses</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">success?</span>
@@ -130,17 +139,118 @@
 <span class="ruby-identifier">raw_response</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">http_response</span>
 </pre>
 
-<p>Beware, this will not validate your api key by triggering the appropriate api endpoint. You are required to explicitly call the appropriate method if you want to check the status of your token.</p>
+<h3 id="label-Api+calls">Api calls<span><a href="#label-Api+calls">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can take inspiration on the params to provide to your calls by visiting the <a href="https://www.fattura24.com/api-documentazione/">official documentation</a>. Generally speaking, this library will translate the structure of your hash to an equivalent xml document camelizing all of your keys.</p>
+
+<h4 id="label-TestKey-2C+GetTemplate-2C+GetPdc-2C+GetNumerator">TestKey, GetTemplate, GetPdc, GetNumerator<span><a href="#label-TestKey-2C+GetTemplate-2C+GetPdc-2C+GetNumerator">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>All of these calls don&#39;t require any argument. Simply call them and inspect their response:</p>
+
+<pre class="ruby"><span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">test_key</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_template</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_pdc</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_numerator</span>
+
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_h</span>
+</pre>
+
+<h4 id="label-SaveCustomer">SaveCustomer<span><a href="#label-SaveCustomer">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">save_customer</span>(
+  <span class="ruby-value">customer_name:</span> <span class="ruby-string">&#39;John Doe&#39;</span>,
+  <span class="ruby-value">customer_address:</span> <span class="ruby-string">&#39;100 Yonge Street&#39;</span>,
+  <span class="ruby-value">customer_city:</span> <span class="ruby-string">&#39;Toronto&#39;</span>,
+  <span class="ruby-value">customer_country:</span> <span class="ruby-string">&#39;CA&#39;</span>,
+  <span class="ruby-value">customer_fiscal_code:</span> <span class="ruby-string">&#39;Set this for persons&#39;</span>,
+  <span class="ruby-value">customer_vat_code:</span> <span class="ruby-string">&#39;vat&#39;</span>,
+  <span class="ruby-value">customer_email:</span> <span class="ruby-string">&#39;some@email.com&#39;</span>,
+  <span class="ruby-value">fe_customer_pec:</span> <span class="ruby-string">&#39;a@pec.com&#39;</span>
+)
+</pre>
+
+<h4 id="label-SaveDocument">SaveDocument<span><a href="#label-SaveDocument">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">save_document</span>(
+  <span class="ruby-value">document_type:</span> <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">DocumentType</span><span class="ruby-operator">::</span><span class="ruby-constant">ELECTRONIC_INVOICE</span>,
+  <span class="ruby-value">customer_name:</span> <span class="ruby-string">&#39;John Doe&#39;</span>,
+  <span class="ruby-value">customer_fiscal_code:</span> <span class="ruby-string">&#39;NDASFN89A27L219Y&#39;</span>,
+  <span class="ruby-value">customer_address:</span> <span class="ruby-string">&#39;100 Yonge Street&#39;</span>,
+  <span class="ruby-value">customer_city:</span> <span class="ruby-string">&#39;Toronto&#39;</span>,
+  <span class="ruby-value">customer_country:</span> <span class="ruby-string">&#39;CA&#39;</span>,
+  <span class="ruby-value">payments:</span> [
+    {
+      <span class="ruby-value">date:</span> <span class="ruby-string">&#39;2020-04-27&#39;</span>,
+      <span class="ruby-value">amount:</span> <span class="ruby-string">&#39;100&#39;</span>,
+      <span class="ruby-value">paid:</span> <span class="ruby-string">&#39;true&#39;</span>
+    }
+  ],
+  <span class="ruby-value">rows:</span> [
+    {
+      <span class="ruby-value">code:</span> <span class="ruby-string">&#39;001&#39;</span>,
+      <span class="ruby-value">description:</span> <span class="ruby-string">&#39;Element description&#39;</span>,
+      <span class="ruby-value">qty:</span> <span class="ruby-string">&#39;1&#39;</span>,
+      <span class="ruby-value">price:</span> <span class="ruby-string">&#39;100&#39;</span>
+    }
+  ],
+  <span class="ruby-value">id_template:</span> <span class="ruby-string">&#39;65&#39;</span>,
+  <span class="ruby-value">send_email:</span> <span class="ruby-string">&#39;true&#39;</span>,
+  <span class="ruby-value">object:</span> <span class="ruby-string">&#39;test&#39;</span>,
+  <span class="ruby-value">total:</span> <span class="ruby-value">100</span>,
+  <span class="ruby-value">total_without_tax:</span> <span class="ruby-value">100</span>,
+  <span class="ruby-value">vat_amount:</span> <span class="ruby-value">0</span>
+)
+</pre>
+
+<h4 id="label-GetFile">GetFile<span><a href="#label-GetFile">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_file</span>(<span class="ruby-string">&#39;1234567&#39;</span>)
+
+<span class="ruby-comment"># true if response content is actually a file</span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">pdf?</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;invoice.pdf&#39;</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h4 id="label-GetProduct">GetProduct<span><a href="#label-GetProduct">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-comment"># gets all products</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_product</span>
+
+<span class="ruby-comment"># filters by code</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_product</span>(<span class="ruby-value">code:</span> <span class="ruby-string">&#39;some_code&#39;</span>)
+
+<span class="ruby-comment"># filters by category</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_product</span>(<span class="ruby-value">category:</span> <span class="ruby-string">&#39;some_category&#39;</span>)
+
+<span class="ruby-comment"># combines both</span>
+<span class="ruby-identifier">r</span> = <span class="ruby-constant">Fattura24</span><span class="ruby-operator">::</span><span class="ruby-constant">Api</span>.<span class="ruby-identifier">get_product</span>({
+  <span class="ruby-value">code:</span> <span class="ruby-string">&#39;some_code&#39;</span>,
+  <span class="ruby-value">category:</span> <span class="ruby-string">&#39;some_category&#39;</span>
+})
+</pre>
 
 <h2 id="label-Development">Development<span><a href="#label-Development">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>After checking out the repo, run <code>bundle</code> to install dependencies. Then, run <code>bundle exec rake</code> to run the tests. You can also run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
+<p>After checking out the repo, run <code>bundle</code> to install dependencies. You can run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
 
 <p>To install this gem onto your local machine, run <code>bundle exec rake install</code>.</p>
 
+<p>To run tests and linting, simply run <code>bundle exec rake</code>.</p>
+
+<p>When you edit something, include appropriate docs and rebuild them by running <code>bundle exec rake rdoc</code>.</p>
+
+<p>If you have docker installed, you can test against all of the supported ruby versions by running:</p>
+
+<pre>$ make build</pre>
+
+<p>That will build the required docker images, and then you can run tests with:</p>
+
+<pre>$ make</pre>
+
 <h3 id="label-Release+of+a+new+version">Release of a new version<span><a href="#label-Release+of+a+new+version">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>To release a new version, update the version number in <code>version.rb</code>, and <code>lib/fattura24/version</code>. Make sure version tests are still satisfied. Then run <code>bundle exec rake release</code>, which will create a git tag for the version, push git commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
+<p>To release a new version, update the version number in <code>lib/fattura24/version.rb</code>. Make sure version tests are still satisfied. Then run <code>bundle exec rake release</code>, which will create a git tag for the version, push git commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">rubygems.org</a>.</p>
 
 <h2 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
