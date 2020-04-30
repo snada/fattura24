@@ -12,6 +12,7 @@ file_regex = /^(
   \.rubocop.yml|
   \.ruby-version|
   \.travis.yml|
+  \.codeclimate.yml|
   Makefile|
   Dockerfile\.|
   test|
