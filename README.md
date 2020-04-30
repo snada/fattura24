@@ -1,5 +1,7 @@
 # Fattura24
 
+[![Build Status](https://travis-ci.org/snada/fattura24.svg?branch=master)](https://travis-ci.org/snada/fattura24)
+
 Simple, lightweight and with minimal dependencies ruby 2 wrapper for the [Fattura24](https://www.fattura24.com/) apis.
 
 Tested and developed on rubies 2.4+, should be simple enough to work on older versions.
