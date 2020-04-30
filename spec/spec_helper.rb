@@ -7,6 +7,7 @@ require 'bundler/setup'
 require 'webmock/rspec'
 require 'pry'
 require 'fattura24'
+require 'shared_context'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -20,6 +21,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.after(:example) do
     Fattura24.configure do |c|

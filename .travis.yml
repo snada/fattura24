@@ -10,10 +10,13 @@ rvm:
   - 2.5.8
   - 2.6.6
   - 2.7.1
+before_install: gem install bundler -v 2.1
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-before_install: gem install bundler -v 2.1
+script:
+  - bundle exec rubocop
+  - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

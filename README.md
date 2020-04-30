@@ -1,6 +1,8 @@
 # Fattura24
 
 [![Build Status](https://travis-ci.org/snada/fattura24.svg?branch=master)](https://travis-ci.org/snada/fattura24)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8db0d6f2c8e567f09319/maintainability)](https://codeclimate.com/github/snada/fattura24/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8db0d6f2c8e567f09319/test_coverage)](https://codeclimate.com/github/snada/fattura24/test_coverage)
 
 Simple, lightweight and with minimal dependencies ruby 2 wrapper for the [Fattura24](https://www.fattura24.com/) apis.
 
@@ -147,7 +149,7 @@ r = Fattura24::Api.get_product({
 
 ## Development
 
-After checking out the repo, run `bundle` to install dependencies. Then, run `bundle exec rake` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bundle` to install dependencies. You can run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 

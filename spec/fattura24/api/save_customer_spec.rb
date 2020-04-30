@@ -5,17 +5,9 @@ RSpec.describe Fattura24::Api do
     let(:url) { 'https://www.app.fattura24.com/api/v0.3/SaveCustomer' }
 
     context 'with an invalid api key' do
-      let(:xml) do
-        <<~XML
-          <root><returnCode>-1</returnCode><description>You are not authorized to use this service. For more details write to assistenza@fattura24.com</description></root>
-        XML
-      end
+      include_context 'invalid api key'
 
       before(:each) do
-        Fattura24.configure do |c|
-          c.api_key = 'invalid'
-        end
-
         stub_request(:post, url)
           .with(body: { apiKey: 'invalid', xml: '<?xml version="1.0" encoding="UTF-8"?><Fattura24><Document><CustomerName>whatever</CustomerName></Document></Fattura24>' })
           .to_return(status: 200, body: xml, headers: {})
@@ -23,10 +15,7 @@ RSpec.describe Fattura24::Api do
 
       it 'returns error' do
         expect(Fattura24::Api.save_customer({ customer_name: 'whatever' }).to_h).to eq(
-          root: {
-            return_code: '-1',
-            description: 'You are not authorized to use this service. For more details write to assistenza@fattura24.com'
-          }
+          invalid_api_key_response
         )
       end
     end
