@@ -1,0 +1,103 @@
+<root>
+  <return_cod>TP04</return_cod>
+  <return_mes>OK</return_mes>
+  <hostname>f24nodo3</hostname>
+  <modelloDDT>
+    <id>8098</id>
+    <idTipoDocumento>8</idTipoDocumento>
+    <idUtente>0</idUtente>
+    <descrizione>
+      <![CDATA[Documento di trasporto - Alternativo]]>
+    </descrizione>
+    <nota>
+      <![CDATA[]]>
+    </nota>
+    <dataCreazione>27/08/2019</dataCreazione>
+    <isWorkCity>1</isWorkCity>
+    <owner>Modelli Fattura24</owner>
+    <isDefault>false</isDefault>
+  </modelloDDT>
+  <modelloFattura>
+    <id>65</id>
+    <idTipoDocumento>1</idTipoDocumento>
+    <idUtente>0</idUtente>
+    <descrizione>
+      <![CDATA[Modello "Agenti di commercio"]]>
+    </descrizione>
+    <nota>
+      <![CDATA[Questo modello, e' stato pensato per gli Agenti di Commercio.
+
+
+
+E' caratterizzato dalla presenza della ritenuta Enasarco.]]>
+    </nota>
+    <dataCreazione>27/08/2019</dataCreazione>
+    <isWorkCity>1</isWorkCity>
+    <owner>Modelli Fattura24</owner>
+    <isDefault>false</isDefault>
+  </modelloFattura>
+  <modelloFatturaFe>
+    <id>65</id>
+    <idTipoDocumento>1</idTipoDocumento>
+    <idUtente>0</idUtente>
+    <descrizione>
+      <![CDATA[Modello "Agenti di commercio"]]>
+    </descrizione>
+    <nota>
+      <![CDATA[Questo modello, e' stato pensato per gli Agenti di Commercio.
+
+
+
+E' caratterizzato dalla presenza della ritenuta Enasarco.]]>
+    </nota>
+    <dataCreazione>27/08/2019</dataCreazione>
+    <isWorkCity>1</isWorkCity>
+    <owner>Modelli Fattura24</owner>
+    <isDefault>false</isDefault>
+  </modelloFatturaFe>
+  <modelloOrdine>
+    <id>31267</id>
+    <idTipoDocumento>12</idTipoDocumento>
+    <idUtente>0</idUtente>
+    <descrizione>
+      <![CDATA[Ordine - SmartCod]]>
+    </descrizione>
+    <nota>
+      <![CDATA[]]>
+    </nota>
+    <dataCreazione>05/03/2020</dataCreazione>
+    <isWorkCity>1</isWorkCity>
+    <owner>Modelli Fattura24</owner>
+    <isDefault>false</isDefault>
+  </modelloOrdine>
+  <modelloPreventivo>
+    <id>31270</id>
+    <idTipoDocumento>6</idTipoDocumento>
+    <idUtente>0</idUtente>
+    <descrizione>
+      <![CDATA[Preventivi - SmartCod]]>
+    </descrizione>
+    <nota>
+      <![CDATA[]]>
+    </nota>
+    <dataCreazione>05/03/2020</dataCreazione>
+    <isWorkCity>1</isWorkCity>
+    <owner>Modelli Fattura24</owner>
+    <isDefault>false</isDefault>
+  </modelloPreventivo>
+  <modelloRapportino>
+    <id>9538</id>
+    <idTipoDocumento>17</idTipoDocumento>
+    <idUtente>0</idUtente>
+    <descrizione>
+      <![CDATA[Rapportino Elegante]]>
+    </descrizione>
+    <nota>
+      <![CDATA[]]>
+    </nota>
+    <dataCreazione>27/08/2019</dataCreazione>
+    <isWorkCity>1</isWorkCity>
+    <owner>Modelli Fattura24</owner>
+    <isDefault>true</isDefault>
+  </modelloRapportino>
+</root>

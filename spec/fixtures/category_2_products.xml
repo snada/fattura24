@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <prodotto>
+    <id>0000002</id>
+    <descrizione><![CDATA[Product2]]></descrizione>
+    <testo><![CDATA[text2]]></testo>
+    <categoria><![CDATA[category2]]></categoria>
+    <codice><![CDATA[code2]]></codice>
+    <nota><![CDATA[]]></nota>
+    <importo>0.0</importo>
+    <idIva>38</idIva>
+    <idUnita>1</idUnita>
+    <idPdcAcquisto>-1</idPdcAcquisto>
+    <idPdcVendita>-1</idPdcVendita>
+    <magAttivo>0</magAttivo>
+    <magIdUbicazione>0</magIdUbicazione>
+  </prodotto>
+  <magazzino>
+    <magIdUbicazione>0</magIdUbicazione>
+    <magScortaMinima>0.0</magScortaMinima>
+    <magGiacenza>null</magGiacenza>
+    <magInArrivo>null</magInArrivo>
+    <magImpegnata>null</magImpegnata>
+    <magPrimoCarico>N.D.</magPrimoCarico>
+    <magUltimoCarico>N.D.</magUltimoCarico>
+    <magUltimoScarico>N.D.</magUltimoScarico>
+  </magazzino>
+</root>

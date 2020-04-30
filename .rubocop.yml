@@ -1,0 +1,28 @@
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false
+Layout/FirstHashElementIndentation:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+Layout/LineLength:
+  Enabled: true
+  IgnoredPatterns:
+    - ^\s*# {
+  Exclude:
+    - spec/**/*

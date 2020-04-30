@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'dotenv/load'
+require 'fattura24'
+# require 'pry'
+
+# Add a .env file in root of your project to easily initialize the library
+
+Fattura24.configure do |c|
+  c.api_key = ENV['API_KEY'] || 'test'
+end
+
+response = Fattura24::Api.test_key
+puts response.to_h
+
+require 'irb'
+IRB.start(__FILE__)
