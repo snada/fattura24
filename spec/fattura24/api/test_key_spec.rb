@@ -15,6 +15,8 @@ RSpec.describe Fattura24::Api do
     end
 
     context 'with a valid api key' do
+      include_context 'valid api key'
+
       let(:xml) do
         <<~XML
           <root><returnCode>1</returnCode><subscription><type>5</type><expire>21/04/2021</expire></subscription><description>Complimenti, la tua API KEY &egrave; corretta.</description></root>
@@ -22,10 +24,6 @@ RSpec.describe Fattura24::Api do
       end
 
       before(:each) do
-        Fattura24.configure do |c|
-          c.api_key = 'valid'
-        end
-
         stub_request(:post, url)
           .with(body: { apiKey: 'valid' })
           .to_return(status: 200, body: xml, headers: {})

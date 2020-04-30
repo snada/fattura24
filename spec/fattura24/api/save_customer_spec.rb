@@ -19,6 +19,8 @@ RSpec.describe Fattura24::Api do
     end
 
     context 'with a valid api key' do
+      include_context 'valid api key'
+
       let(:xml) do
         <<~XML
           <root><returnCode>0</returnCode><description>Operazione completata con successo</description><id>0000000</id><CustomerName><![CDATA[John Doe]]></CustomerName><CustomerCity><![CDATA[Torino]]></CustomerCity><CustomerAddress><![CDATA[Via Po 1]]></CustomerAddress><CustomerPostcode><![CDATA[10100]]></CustomerPostcode><CustomerVatCode><![CDATA[03912377542]]></CustomerVatCode><CustomerFiscalCode><![CDATA[MARROS66C44G217W]]></CustomerFiscalCode><CustomerEmail><![CDATA[email@fake.com]]></CustomerEmail><CustomerCellPhone><![CDATA[335123456789]]></CustomerCellPhone><FeCustomerPec><![CDATA[pec@fake.com]]></FeCustomerPec><FeDestinationCode><![CDATA[0000000]]></FeDestinationCode></root>
@@ -26,10 +28,6 @@ RSpec.describe Fattura24::Api do
       end
 
       before(:each) do
-        Fattura24.configure do |c|
-          c.api_key = 'valid'
-        end
-
         stub_request(:post, url)
           .with(body: {
             apiKey: 'valid',
@@ -78,6 +76,15 @@ RSpec.describe Fattura24::Api do
           XML
         end
 
+        let(:return_hash) do
+          {
+            root: {
+              return_code: '-2',
+              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
+            }
+          }
+        end
+
         before(:each) do
           stub_request(:post, url)
             .with(body: {
@@ -88,30 +95,15 @@ RSpec.describe Fattura24::Api do
         end
 
         it 'fails on empty data' do
-          expect(Fattura24::Api.save_customer.to_h).to eq(
-            root: {
-              return_code: '-2',
-              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
-            }
-          )
+          expect(Fattura24::Api.save_customer.to_h).to eq(return_hash)
         end
 
         it 'fails on empty data' do
-          expect(Fattura24::Api.save_customer({}).to_h).to eq(
-            root: {
-              return_code: '-2',
-              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
-            }
-          )
+          expect(Fattura24::Api.save_customer({}).to_h).to eq(return_hash)
         end
 
         it 'fails on empty data' do
-          expect(Fattura24::Api.save_customer([nil]).to_h).to eq(
-            root: {
-              return_code: '-2',
-              description: 'Your XML is wrong. If you want write to technical support: assistenza@fattura24.com'
-            }
-          )
+          expect(Fattura24::Api.save_customer([nil]).to_h).to eq(return_hash)
         end
       end
     end

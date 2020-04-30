@@ -13,15 +13,13 @@ RSpec.describe Fattura24::Api do
     end
 
     context 'with a valid api key' do
+      include_context 'valid api key'
+
       let(:all_xml) { File.read('spec/fixtures/all_products.xml') }
       let(:code_1_xml) { File.read('spec/fixtures/code_1_products.xml') }
       let(:category_2_xml) { File.read('spec/fixtures/category_2_products.xml') }
 
       before(:each) do
-        Fattura24.configure do |c|
-          c.api_key = 'valid'
-        end
-
         stub_request(:post, url)
           .with(body: { apiKey: 'valid' })
           .to_return(status: 200, body: all_xml, headers: {})
