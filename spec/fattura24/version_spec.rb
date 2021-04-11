@@ -2,6 +2,6 @@
 
 RSpec.describe Fattura24::VERSION do
   it 'returns the right version number' do
-    expect(Fattura24::VERSION).to eq('1.0.0')
+    expect(Fattura24::VERSION).to eq('1.0.1')
   end
 end
