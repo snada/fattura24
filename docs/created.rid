@@ -1,10 +1,11 @@
-Thu, 30 Apr 2020 16:20:21 -0400
-README.md	Thu, 30 Apr 2020 15:54:47 -0400
-lib/fattura24.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/api/client.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/api/response.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/configuration.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/document_type.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/errors.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/utils.rb	Thu, 30 Apr 2020 02:29:51 -0400
-lib/fattura24/version.rb	Thu, 30 Apr 2020 02:29:51 -0400
+Sun, 11 Apr 2021 02:05:39 -0000
+README.md	Sat, 10 Apr 2021 22:05:04 -0400
+lib/fattura24.rb	Sat, 10 Apr 2021 22:01:59 -0400
+lib/fattura24/api/client.rb	Sat, 10 Apr 2021 20:40:44 -0400
+lib/fattura24/api/response.rb	Sat, 10 Apr 2021 20:40:44 -0400
+lib/fattura24/configuration.rb	Sat, 10 Apr 2021 20:40:44 -0400
+lib/fattura24/document_type.rb	Sat, 10 Apr 2021 20:40:44 -0400
+lib/fattura24/errors.rb	Sat, 10 Apr 2021 20:40:44 -0400
+lib/fattura24/fe_payment_code.rb	Sat, 10 Apr 2021 22:01:59 -0400
+lib/fattura24/utils.rb	Sat, 10 Apr 2021 20:40:44 -0400
+lib/fattura24/version.rb	Sat, 10 Apr 2021 20:40:44 -0400

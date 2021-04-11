@@ -1,3 +1,6 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  NewCops: enable
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 Lint/RaiseException:
@@ -20,6 +23,7 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - spec/**/*
+  Max: 30
 Layout/LineLength:
   Enabled: true
   IgnoredPatterns:
