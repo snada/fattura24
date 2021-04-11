@@ -21,7 +21,6 @@
 <link href="../css/rdoc.css" rel="stylesheet">
 
 
-
 <body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
@@ -61,32 +60,22 @@
     
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-get_file">::get_file</a>
-    
     <li ><a href="#method-c-get_numerator">::get_numerator</a>
-    
     <li ><a href="#method-c-get_pdc">::get_pdc</a>
-    
     <li ><a href="#method-c-get_product">::get_product</a>
-    
     <li ><a href="#method-c-get_template">::get_template</a>
-    
     <li ><a href="#method-c-request">::request</a>
-    
     <li ><a href="#method-c-save_customer">::save_customer</a>
-    
     <li ><a href="#method-c-save_document">::save_document</a>
-    
     <li ><a href="#method-c-save_item">::save_item</a>
-    
     <li ><a href="#method-c-test_key">::test_key</a>
-    
   </ul>
 </div>
 
@@ -102,55 +91,36 @@
     
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
     <section class="constants-list">
       <header>
         <h3>Constants</h3>
       </header>
       <dl>
-      
         <dt id="API_HOST">API_HOST
-        
         <dd><p>This library uses <a href="https://fattura24.com">fattura24.com</a> v0.3 apis. Check their docs <a href="https://www.fattura24.com/api-documentazione/">here</a>.</p>
-        
-      
       </dl>
     </section>
-    
 
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-get_file" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_file</span><span
             class="method-args">(id)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Donwloads a pdf file for an existing document. Requires an existing document id, throws <a href="MissingInput.html">MissingInput</a> when passing a nil <code>id</code>. Returns a <a href="Api/Response.html">Response</a> object: refer to it&#39;s documentation to detect a binary file and instruction to save it to disk.</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_file-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_file</span>(<span class="ruby-identifier">id</span>)
@@ -159,99 +129,63 @@
   <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/GetFile&#39;</span>, { <span class="ruby-value">docId:</span> <span class="ruby-identifier">id</span> })
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-get_numerator" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_numerator</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Gets numerator list. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_numerator-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_numerator</span>
   <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/GetNumerator&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-get_pdc" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_pdc</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Gets &#39;piano dei conti&#39; Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_pdc-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_pdc</span>
   <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/GetPdc&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-get_product" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_product</span><span
             class="method-args">(options = {})</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Gets a list of products. You can pass a Hash containing a <code>code</code> or <code>category</code> to filter your existing products by them. Throws a <a href="InvalidParams.html">InvalidParams</a> when passing an hash containing unrecognized options. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_product-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_product</span>(<span class="ruby-identifier">options</span> = {})
@@ -259,66 +193,42 @@
   <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/GetProduct&#39;</span>, <span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-get_template" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_template</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Gets a list of document templates. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_template-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_template</span>
   <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/GetTemplate&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-request" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">request</span><span
             class="method-args">(path, body = {})</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Performs a generic request on the api endpoint using Ruby&#39;s <a href="https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html">Net::HTTP</a>. All the other api methods call this one. Parameter <code>path</code> should always be prepended with &#39;/&#39;. Body will default to an empty hash. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="request-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">request</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">body</span> = {})
@@ -336,33 +246,21 @@
   <span class="ruby-constant">Response</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">response</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-save_customer" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">save_customer</span><span
             class="method-args">(data = {})</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Saves a customer in your contact list. Any <code>nil</code> parameter will be deeply removed by using the <a href="Utils.html#method-c-crush">crush</a> utility. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="save_customer-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">save_customer</span>(<span class="ruby-identifier">data</span> = {})
@@ -371,33 +269,21 @@
   })
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-save_document" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">save_document</span><span
             class="method-args">(data = {})</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Use this to create documents. Pass a hash with the data, check the <a href="../README_md.html">README</a> file for examples. Use <a href="DocumentType.html">DocumentType</a> enums to specify document type. Any <code>nil</code> parameter will be deeply removed by using the <a href="Utils.html#method-c-crush">crush</a> utility. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="save_document-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">save_document</span>(<span class="ruby-identifier">data</span> = {})
@@ -406,33 +292,21 @@
   })
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-save_item" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">save_item</span><span
             class="method-args">(data = {})</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Creates a credit. Any <code>nil</code> parameter will be deeply removed by using the <a href="Utils.html#method-c-crush">crush</a> utility. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="save_item-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">save_item</span>(<span class="ruby-identifier">data</span> = {})
@@ -441,57 +315,41 @@
   })
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-test_key" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">test_key</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Tests validity of your api key. Returns a <a href="Api/Response.html">Response</a> object.</p>
-          
-          
 
-          
           <div class="method-source-code" id="test_key-source">
             <pre><span class="ruby-comment"># File lib/fattura24/api/client.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">test_key</span>
   <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/TestKey&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

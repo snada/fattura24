@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/8db0d6f2c8e567f09319/maintainability)](https://codeclimate.com/github/snada/fattura24/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8db0d6f2c8e567f09319/test_coverage)](https://codeclimate.com/github/snada/fattura24/test_coverage)
 
-Simple, lightweight and with minimal dependencies ruby 2 wrapper for the [Fattura24](https://www.fattura24.com/) apis.
+Simple, lightweight and with minimal dependencies ruby 2+ wrapper for the [Fattura24](https://www.fattura24.com/) apis.
 
 Tested and developed on rubies 2.4+.
 
@@ -93,6 +93,7 @@ r = Fattura24::Api.save_document(
   customer_address: '100 Yonge Street',
   customer_city: 'Toronto',
   customer_country: 'CA',
+  fe_payment_code: Fattura24::FePaymentCode::CREDIT_CARD,
   payments: [
     {
       date: '2020-04-27',
